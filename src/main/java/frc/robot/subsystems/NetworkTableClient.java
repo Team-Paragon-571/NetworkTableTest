@@ -9,34 +9,33 @@ import java.time.format.DateTimeFormatter;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StringPublisher;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;    
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class NetworkTableClient extends SubsystemBase {
-  private final StringPublisher timePub;
-  private final DateTimeFormatter timeFormat;
-  private final NetworkTableInstance instance;
-  
-  private LocalDateTime time = java.time.LocalDateTime.now();
+    private final StringPublisher timePub;
+    private final DateTimeFormatter timeFormat;
+    private final NetworkTableInstance instance;
 
-  public NetworkTableClient() {
-    instance = NetworkTableInstance.getDefault();
-    //instance.setServer("localhost", NetworkTableInstance.kDefaultPort4);
+    private LocalDateTime time = java.time.LocalDateTime.now();
 
-    NetworkTable table = instance.getTable(getName());
+    public NetworkTableClient() {
+        instance = NetworkTableInstance.getDefault();
+        // instance.setServer("localhost", NetworkTableInstance.kDefaultPort4);
 
-    timePub = table.getStringTopic("time").publish();
-    timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd | hh:mm:ss | a");
-  }
+        NetworkTable table = instance.getTable(getName());
 
-  @Override
-  public void periodic() {
-    //public values that increase constantly
-    timePub.set(time.format(timeFormat));
-    time = LocalDateTime.now();
+        timePub = table.getStringTopic("time").publish();
+        timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd | hh:mm:ss | a");
+    }
 
-  }
-  
-  public NetworkTableInstance getNetworkTableInstance() {
-    return instance;
-  }
+    @Override
+    public void periodic() {
+        // public values that increase constantly
+        timePub.set(time.format(timeFormat));
+        time = LocalDateTime.now();
+    }
+
+    public NetworkTableInstance getNetworkTableInstance() {
+        return instance;
+    }
 }

@@ -11,49 +11,50 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.NetworkTableClient;
 
 public class upXYValues extends CommandBase {
-  private final NetworkTableClient networkTableClient;
-  private double x,y;
-  private final DoublePublisher xPub;
-  private final DoublePublisher yPub;
-  
-  /** Creates a new upXYValues. */
-  public upXYValues(NetworkTableClient ntc) { 
-    System.out.println("initializing upXYValuesCommand...");
-    networkTableClient = ntc;
-    NetworkTableInstance networkTableInstance = networkTableClient.getNetworkTableInstance();
-    NetworkTable networkTable = networkTableInstance.getTable(getName());
-    xPub  = networkTable.getDoubleTopic("x").publish();
-    yPub = networkTable.getDoubleTopic("y").publish();
-    addRequirements(ntc);
-    initialize();
-  }
+    private final NetworkTableClient networkTableClient;
+    private double x, y;
+    private final DoublePublisher xPub;
+    private final DoublePublisher yPub;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    x = 0;
-    y = 0;
-    xPub.set(x);
-    yPub.set(y);
-    execute();
-  }
+    /** Creates a new upXYValues. */
+    public upXYValues(NetworkTableClient ntc) {
+        System.out.println("initializing upXYValuesCommand...");
+        networkTableClient = ntc;
+        NetworkTableInstance networkTableInstance = networkTableClient.getNetworkTableInstance();
+        NetworkTable networkTable = networkTableInstance.getTable(getName());
+        xPub = networkTable.getDoubleTopic("x").publish();
+        yPub = networkTable.getDoubleTopic("y").publish();
+        addRequirements(ntc);
+        initialize();
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-      xPub.set(x);
-      yPub.set(y);
-      x += 1.00007;
-      y += 1.5;
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize() {
+        x = 0;
+        y = 0;
+        xPub.set(x);
+        yPub.set(y);
+        execute();
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        xPub.set(x);
+        yPub.set(y);
+        x += 1.00007;
+        y += 1.5;
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted) {
+    }
+
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

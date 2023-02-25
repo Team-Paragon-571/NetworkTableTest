@@ -18,37 +18,40 @@ import frc.robot.subsystems.NetworkTableClient;
  */
 public class RobotContainer {
 
-  private XboxController driveStick;
-  // The robot's subsystems
+    private XboxController driveStick;
+    // The robot's subsystems
 
-  // The driver's controller
- 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
-    driveStick = new XboxController(0);
+    // The driver's controller
 
-    // Configure the button bindings
-    configureButtonBindings();
+    /**
+     * The container for the robot. Contains subsystems, OI devices, and commands.
+     */
+    public RobotContainer() {
+        driveStick = new XboxController(0);
 
-    // Configure default commands
+        // Configure the button bindings
+        configureButtonBindings();
+
+        // Configure default commands
 
         // A split-stick arcade command, with forward/backward controlled by the left
         // hand, and turning controlled by the right.
 
-  }
+    }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link edu.wpi.first.wpilibj.GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then calling passing it to a
-   * {@link JoystickButton}.
-   */
-        private void configureButtonBindings() {
-          Trigger aButton = new JoystickButton(driveStick,XboxController.Button.kA.value); 
-          NetworkTableClient ntc = new NetworkTableClient();
-          upXYValues runXY = new upXYValues(ntc);
-          aButton.whileTrue(runXY);
-        }
-
+    /**
+     * Use this method to define your button->command mappings. Buttons can be
+     * created by
+     * instantiating a {@link edu.wpi.first.wpilibj.GenericHID} or one of its
+     * subclasses ({@link
+     * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then calling
+     * passing it to a
+     * {@link JoystickButton}.
+     */
+    private void configureButtonBindings() {
+        Trigger aButton = new JoystickButton(driveStick, XboxController.Button.kA.value);
+        NetworkTableClient ntc = new NetworkTableClient();
+        upXYValues runXY = new upXYValues(ntc);
+        aButton.whileTrue(runXY);
+    }
 }
-
