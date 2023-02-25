@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import edu.wpi.first.networktables.DoublePublisher;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StringPublisher;
