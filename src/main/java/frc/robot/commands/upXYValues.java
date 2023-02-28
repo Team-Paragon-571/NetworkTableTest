@@ -44,7 +44,6 @@ public class upXYValues extends CommandBase {
         xPub.set(x);
         yPub.set(y);
         x += 10;
-        
         y += 25;
     }
 
