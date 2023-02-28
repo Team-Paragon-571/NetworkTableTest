@@ -43,8 +43,8 @@ public class upXYValues extends CommandBase {
     public void execute() {
         xPub.set(x);
         yPub.set(y);
-        x += 1.00007;
-        y += 1.5;
+        x += 10;
+        y += 25;
     }
 
     // Called once the command ends or is interrupted.
@@ -57,4 +57,5 @@ public class upXYValues extends CommandBase {
     public boolean isFinished() {
         return false;
     }
+    
 }
