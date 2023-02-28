@@ -4,47 +4,28 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.DoublePublisher;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.NetworkTableClient;
 
 public class upXYValues extends CommandBase {
-    private final NetworkTableClient networkTableClient;
-    private double x, y;
-    private final DoublePublisher xPub;
-    private final DoublePublisher yPub;
+    private final NetworkTableClient ntc;
 
     /** Creates a new upXYValues. */
     public upXYValues(NetworkTableClient ntc) {
-        System.out.println("initializing upXYValuesCommand...");
-        networkTableClient = ntc;
-        NetworkTableInstance networkTableInstance = networkTableClient.getNetworkTableInstance();
-        NetworkTable networkTable = networkTableInstance.getTable(getName());
-        xPub = networkTable.getDoubleTopic("x").publish();
-        yPub = networkTable.getDoubleTopic("y").publish();
+        this.ntc = ntc;
         addRequirements(ntc);
-        initialize();
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        x = 0;
-        y = 0;
-        xPub.set(x);
-        yPub.set(y);
-        execute();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        xPub.set(x);
-        yPub.set(y);
-        x += 1.00007;
-        y += 1.5;
+        ntc.incrementX(10);
+        ntc.incrementY(25);
     }
 
     // Called once the command ends or is interrupted.

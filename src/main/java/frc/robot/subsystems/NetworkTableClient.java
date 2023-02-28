@@ -6,6 +6,8 @@ package frc.robot.subsystems;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import edu.wpi.first.networktables.DoublePublisher;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StringPublisher;
@@ -15,6 +17,8 @@ public class NetworkTableClient extends SubsystemBase {
     private final StringPublisher timePub;
     private final DateTimeFormatter timeFormat;
     private final NetworkTableInstance instance;
+    private final DoublePublisher xPub, yPub;
+    private double x, y;
 
     private LocalDateTime time = java.time.LocalDateTime.now();
 
@@ -26,6 +30,8 @@ public class NetworkTableClient extends SubsystemBase {
 
         timePub = table.getStringTopic("time").publish();
         timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd | hh:mm:ss | a");
+        xPub = table.getDoubleTopic("x").publish();
+        yPub = table.getDoubleTopic("y").publish();
     }
 
     @Override
@@ -33,6 +39,23 @@ public class NetworkTableClient extends SubsystemBase {
         // public values that increase constantly
         timePub.set(time.format(timeFormat));
         time = LocalDateTime.now();
+    }
+
+    public void incrementX(double xIncrement) {
+        x += xIncrement;
+        xPub.set(x);
+    }
+    public void incrementY(double yIncrement) {
+        y += yIncrement;
+        yPub.set(y);
+    }
+    public void resetX() {
+        x = 0;
+        xPub.set(x);
+    }
+    public void resetY() {
+        y = 0;
+        yPub.set(y);
     }
 
     public NetworkTableInstance getNetworkTableInstance() {
