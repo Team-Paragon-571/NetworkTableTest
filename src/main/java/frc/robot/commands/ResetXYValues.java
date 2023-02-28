@@ -1,17 +1,13 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.NetworkTableClient;
 
-public class upXYValues extends CommandBase {
+public class ResetXYValues extends CommandBase {
     private final NetworkTableClient ntc;
 
     /** Creates a new upXYValues. */
-    public upXYValues(NetworkTableClient ntc) {
+    public ResetXYValues(NetworkTableClient ntc) {
         this.ntc = ntc;
         addRequirements(ntc);
     }
@@ -24,8 +20,8 @@ public class upXYValues extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        ntc.incrementX(10);
-        ntc.incrementY(25);
+        ntc.resetX();
+        ntc.resetY();
     }
 
     // Called once the command ends or is interrupted.
@@ -38,5 +34,4 @@ public class upXYValues extends CommandBase {
     public boolean isFinished() {
         return false;
     }
-    
 }
