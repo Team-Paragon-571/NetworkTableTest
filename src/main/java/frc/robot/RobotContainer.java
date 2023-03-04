@@ -20,9 +20,6 @@ import frc.robot.subsystems.NetworkTableClient;
 public class RobotContainer {
 
     private XboxController driveStick;
-    // The robot's subsystems
-
-    // The driver's controller
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -30,13 +27,7 @@ public class RobotContainer {
     public RobotContainer() {
         driveStick = new XboxController(0);
 
-        // Configure the button bindings
         configureButtonBindings();
-
-        // Configure default commands
-
-        // A split-stick arcade command, with forward/backward controlled by the left
-        // hand, and turning controlled by the right.
 
     }
 
