@@ -24,8 +24,6 @@ public class NetworkTableClient extends SubsystemBase {
 
     public NetworkTableClient() {
         instance = NetworkTableInstance.getDefault();
-        // instance.setServer("localhost", NetworkTableInstance.kDefaultPort4);
-
         NetworkTable table = instance.getTable(getName());
 
         timePub = table.getStringTopic("time").publish();
@@ -41,18 +39,37 @@ public class NetworkTableClient extends SubsystemBase {
         time = LocalDateTime.now();
     }
 
+    /**
+     * Increnents the values of x
+     * 
+     * @param xIncrement the value which x will change
+     */
     public void incrementX(double xIncrement) {
         x += xIncrement;
         xPub.set(x);
     }
+
+    /**
+     * Increments the values of y
+     * 
+     * @param yIncrement the value which y will change
+     */
     public void incrementY(double yIncrement) {
         y += yIncrement;
         yPub.set(y);
     }
+
+    /**
+     * Resets X and publishes the new value to the smart dashboard
+     */
     public void resetX() {
         x = 0;
         xPub.set(x);
     }
+
+    /**
+     * Resets Y and publishes the new value to the smart dashboard
+     */
     public void resetY() {
         y = 0;
         yPub.set(y);
